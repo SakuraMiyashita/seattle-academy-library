@@ -64,14 +64,15 @@ public class BooksService {
 				+ bookInfo.getTitle() + "','" + bookInfo.getAuthor() + "','" + bookInfo.getPublisher() + "','"
 				+ bookInfo.getThumbnailName() + "','" + bookInfo.getThumbnailUrl() + "'," + "now()," + "now())";
 
-		/**
-		 * 書籍を削除する
-		 * 
-		 * @param bookId 書籍ID
-		 */
-
 		jdbcTemplate.update(sql);
 	}
+	
+	
+	/**
+	 * 書籍を削除する
+	 * 
+	 * @param bookId 書籍ID
+	 */
 
 	public void deleteBook(int bookId) {
 		String sql = "DELETE FROM books WHERE id = " + bookId + ";";
