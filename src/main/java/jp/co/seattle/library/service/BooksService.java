@@ -74,11 +74,11 @@ public class BooksService {
 		String sql = "DELETE FROM books WHERE id = " + bookId + ";";
 		jdbcTemplate.update(sql);
 	}
-	
+
 	/**
 	 * 最新の書籍IDを取得する
 	 *
-	 *＠return bookId 書籍
+	 * ＠return bookId 書籍
 	 */
 	public int getMaxId() {
 
