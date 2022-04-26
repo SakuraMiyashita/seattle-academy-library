@@ -40,7 +40,7 @@
                     <input type="file" accept="image/*" name="thumbnail" id="thumbnail">
                 </div>
                 <div class="content_right">
-                <c:if test="${!empty addErrorMessage}">
+                    <c:if test="${!empty addErrorMessage}">
                         <div class="error">
                             <c:forEach var="errorMessage" items="${addErrorMessage}">
                                 ${errorMessage}
