@@ -32,23 +32,23 @@ public class BooksService {
 	public List<BookInfo> getBookList() {
 
 		// TODO 取得したい情報を取得するようにSQLを修正
-		List<BookInfo> getedBookList = jdbcTemplate.query("select id, title, author, publisher, publish_date, thumbnail_url from books order by title asc", new BookInfoRowMapper());
+		List<BookInfo> getedBookList = jdbcTemplate.query(
+				"select id, title, author, publisher, publish_date, thumbnail_url from books order by title asc",
+				new BookInfoRowMapper());
 
 		return getedBookList;
 	}
-	
+
 	public BookDetailsInfo getBookInfo(int bookId) {
 
-        // JSPに渡すデータを設定する
-        String sql = "SELECT * FROM books where id ="
-                + bookId;
+		// JSPに渡すデータを設定する
+		String sql = "SELECT * FROM books where id =" + bookId;
 
-        BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
+		BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
 
-        return bookDetailsInfo;
-    }
+		return bookDetailsInfo;
+	}
 
-	
 	/**
 	 * 書籍を登録する
 	 *
@@ -58,15 +58,12 @@ public class BooksService {
 
 		String sql = "INSERT INTO books (title, author,publisher,publish_date, isbn , description ,thumbnail_name,thumbnail_url,reg_date,upd_date) VALUES ('"
 				+ bookInfo.getTitle() + "','" + bookInfo.getAuthor() + "','" + bookInfo.getPublisher() + "','"
-				+ bookInfo.getPublishDate() + "','"
-		        + bookInfo.getISBN() + "','"
-		        + bookInfo.getDescription() + "','"
+				+ bookInfo.getPublishDate() + "','" + bookInfo.getISBN() + "','" + bookInfo.getDescription() + "','"
 				+ bookInfo.getThumbnailName() + "','" + bookInfo.getThumbnailUrl() + "'," + "now()," + "now())";
 
 		jdbcTemplate.update(sql);
 	}
-	
-	
+
 	/**
 	 * 書籍を削除する
 	 * 
@@ -77,13 +74,18 @@ public class BooksService {
 		String sql = "DELETE FROM books WHERE id = " + bookId + ";";
 		jdbcTemplate.update(sql);
 	}
+	
+	/**
+	 * 最新の書籍IDを取得する
+	 *
+	 *＠return bookId 書籍
+	 */
 	public int getMaxId() {
 
-        // JSPに渡すデータを設定する
-        String sql = "SELECT MAX(id) FROM books";
+		String sql = "SELECT MAX(id) FROM books";
 
-        int bookId = jdbcTemplate.queryForObject(sql, Integer.class);
+		int bookId = jdbcTemplate.queryForObject(sql, Integer.class);
 
-        return bookId;
-    }
+		return bookId;
+	}
 }
