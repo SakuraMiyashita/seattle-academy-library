@@ -38,6 +38,13 @@ public class BooksService {
 
 		return getedBookList;
 	}
+	
+	/**
+	 * 書籍IDに紐づく書籍詳細情報を取得する
+	 *
+	 * @param bookId 書籍ID
+	 * @return 書籍情報
+	 */
 
 	public BookDetailsInfo getBookInfo(int bookId) {
 
@@ -74,11 +81,11 @@ public class BooksService {
 		String sql = "DELETE FROM books WHERE id = " + bookId + ";";
 		jdbcTemplate.update(sql);
 	}
-
+	
 	/**
 	 * 最新の書籍IDを取得する
 	 *
-	 * ＠return bookId 書籍
+	 *＠return bookId 書籍
 	 */
 	public int getMaxId() {
 
