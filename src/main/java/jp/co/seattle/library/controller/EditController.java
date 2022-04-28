@@ -31,11 +31,10 @@ public class EditController {
 
 	@Autowired
 	private ThumbnailService thumbnailService;
-	
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST) // value＝actionで指定したパラメータ
 	// RequestParamでname属性を取得
-	public String login(@RequestParam("bookId") int bookId,Model model) {
+	public String login(@RequestParam("bookId") int bookId, Model model) {
 		BookDetailsInfo bookDetailsInfo = booksService.getBookInfo(bookId);
 		model.addAttribute("bookDetailsInfo", bookDetailsInfo);
 		return "edit";
@@ -55,18 +54,14 @@ public class EditController {
 	@Transactional
 	@RequestMapping(value = "/editBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String edit(Locale locale,
-			
-			@RequestParam("bookId") int bookId,
-			@RequestParam("title") String title, 
-			@RequestParam("author") String author,
-			@RequestParam("publisher") String publisher, 
-			@RequestParam("publishDate") String publishDate,
-			@RequestParam("ISBN") String ISBN,
-			@RequestParam("description") String description,
-			@RequestParam("thumbnail") MultipartFile file, Model model) {
+
+			@RequestParam("bookId") int bookId, @RequestParam("title") String title,
+			@RequestParam("author") String author, @RequestParam("publisher") String publisher,
+			@RequestParam("publishDate") String publishDate, @RequestParam("ISBN") String ISBN,
+			@RequestParam("description") String description, @RequestParam("thumbnail") MultipartFile file,
+			Model model) {
 		logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
-		
-		
+
 		BookDetailsInfo bookDetailsInfo = new BookDetailsInfo();
 		bookDetailsInfo.setBookId(bookId);
 		bookDetailsInfo.setTitle(title);
@@ -97,9 +92,9 @@ public class EditController {
 				return "edit";
 			}
 		}
-		
-		//バリデーションチェック
-		
+
+		// バリデーションチェック
+
 		List<String> list = new ArrayList<String>();
 		if (title.equals("") || author.equals("") || publisher.equals("") || publishDate.length() == 0) {
 			list.add("<p>必須項目を入力してください。</p>");
@@ -121,16 +116,13 @@ public class EditController {
 			model.addAttribute("bookDetailsInfo", bookDetailsInfo);
 			return "edit";
 		}
-		
 
 		// 書籍情報を新規登録する
 		booksService.updateBookInfo(bookDetailsInfo);
-		
-		
-		
+
 		// TODO 登録した書籍の詳細情報を表示するように実装
 		// 詳細画面に遷移する
-		
+
 		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 		return "details";
 	}
