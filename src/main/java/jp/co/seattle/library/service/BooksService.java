@@ -38,7 +38,7 @@ public class BooksService {
 
 		return getedBookList;
 	}
-	
+
 	/**
 	 * 書籍IDに紐づく書籍詳細情報を取得する
 	 *
@@ -72,6 +72,34 @@ public class BooksService {
 	}
 
 	/**
+	 * 書籍情報を更新する 編集画面
+	 *
+	 * @param
+	 */
+
+	public void updateBookInfo(BookDetailsInfo bookInfo) {
+
+		String sql;
+		if (bookInfo.getThumbnailUrl() != null) {
+			sql = "UPDATE books SET title = " + "'" + bookInfo.getTitle() + "'" + "," + "author =" + "'"
+					+ bookInfo.getAuthor() + "'" + "," + "publisher =" + "'" + bookInfo.getPublisher() + "'" + ","
+					+ "publish_date =" + "'" + bookInfo.getPublishDate() + "'" + "," + "isbn =" + "'"
+					+ bookInfo.getISBN() + "'" + "," + "description =" + "'" + bookInfo.getDescription() + "'" + ","
+					+ "thumbnail_url =" + "'" + bookInfo.getThumbnailUrl() + "'" + "where id =" + bookInfo.getBookId()
+					+ ";";
+
+		} else {
+			sql = "UPDATE books SET title = " + "'" + bookInfo.getTitle() + "'" + "," + "author =" + "'"
+					+ bookInfo.getAuthor() + "'" + "," + "publisher =" + "'" + bookInfo.getPublisher() + "'" + ","
+					+ "publish_date =" + "'" + bookInfo.getPublishDate() + "'" + "," + "isbn =" + "'"
+					+ bookInfo.getISBN() + "'" + "," + "description =" + "'" + bookInfo.getDescription() + "'"
+					+ "where id =" + bookInfo.getBookId() + ";";
+		}
+
+		jdbcTemplate.update(sql);
+	}
+
+	/**
 	 * 書籍を削除する
 	 * 
 	 * @param bookId 書籍ID
@@ -81,11 +109,11 @@ public class BooksService {
 		String sql = "DELETE FROM books WHERE id = " + bookId + ";";
 		jdbcTemplate.update(sql);
 	}
-	
+
 	/**
 	 * 最新の書籍IDを取得する
 	 *
-	 *＠return bookId 書籍
+	 * ＠return bookId 書籍
 	 */
 	public int getMaxId() {
 
