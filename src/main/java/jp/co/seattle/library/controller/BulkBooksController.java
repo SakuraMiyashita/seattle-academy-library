@@ -98,9 +98,7 @@ public class BulkBooksController {
 				model.addAttribute("resultMessage", "登録完了");
 
 			}
-			// final TodoDto todo =
-			// TodoDto.builder().id(Integer.parseInt(split[0])).userId(split[1]).action(split[2]).build();
-			// todoRepository.insert(todo);
+
 		} catch (IOException e) {
 			throw new RuntimeException("ファイルが読み込めません", e);
 		}
